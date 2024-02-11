@@ -52,7 +52,45 @@ SELECT TOP (1000) [abilities]
 
   --Look at table with basic pokemon information alongside their japanese names
 
-  Select pokedex_number, name, japanese_name, type1, type2
+  Select cast(pokedex_number as int), name, japanese_name, type1, type2
   FROM PokemonData.dbo.pokemon$
   order by 1
 
+
+  -- Separate pokemon by region
+
+
+  --Kanto Region
+  SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
+  FROM PokemonData.dbo.pokemon$
+  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+
+  --Johto Region
+  SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
+  FROM PokemonData.dbo.pokemon$
+  WHERE cast(pokedex_number as int) BETWEEN 152 AND 251
+
+  --Hoenn Region
+  SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
+  FROM PokemonData.dbo.pokemon$
+  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+
+  --Sinnoh Region
+  SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
+  FROM PokemonData.dbo.pokemon$
+  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+
+   --Unova Region
+  SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
+  FROM PokemonData.dbo.pokemon$
+  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+
+  --Kalos Region
+  SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
+  FROM PokemonData.dbo.pokemon$
+  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+
+  --Alola Region
+  SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
+  FROM PokemonData.dbo.pokemon$
+  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
