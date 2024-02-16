@@ -73,24 +73,24 @@ SELECT TOP (1000) [abilities]
   --Hoenn Region
   SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
   FROM PokemonData.dbo.pokemon$
-  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+  WHERE cast(pokedex_number as int) BETWEEN 252 AND 386
 
   --Sinnoh Region
   SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
   FROM PokemonData.dbo.pokemon$
-  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+  WHERE cast(pokedex_number as int) BETWEEN 387 AND 493
 
    --Unova Region
   SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
   FROM PokemonData.dbo.pokemon$
-  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+  WHERE cast(pokedex_number as int) BETWEEN 494 AND 649
 
   --Kalos Region
   SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
   FROM PokemonData.dbo.pokemon$
-  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+  WHERE cast(pokedex_number as int) BETWEEN 650 AND 721
 
   --Alola Region
   SELECT cast(pokedex_number as int), name, japanese_name, type1, type2
   FROM PokemonData.dbo.pokemon$
-  WHERE cast(pokedex_number as int) BETWEEN 1 AND 151
+  WHERE cast(pokedex_number as int) BETWEEN 722 AND 809
