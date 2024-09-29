@@ -1,0 +1,29 @@
+#! /usr/bin/sh
+
+# This script takes 2 arguments: an ip and a user type
+# Note that this is a very messy, insecure solution
+# If a bad actor got ahold of this script, they could label themselves with any of these contexts
+# This script is also vulnerable to execution via the command-line arguments
+# Author: Spencer Yoder
+
+# Assign the appropriate label to the given user type
+# More labels can be added if the number of user types expands
+# Slightly more secure than passing in a raw label. These particular types only have enough permission to access the database.
+case $2 in 
+  coordinator)
+    label=course_manager_u:course_manager_r:coordinator_t:s0
+  ;;
+  
+  instructor)
+    label=course_manager_u:course_manager_r:instructor_t:s0
+  ;;
+  
+  student)
+    label=course_manager_u:course_manager_r:student_t:s0
+  ;;
+esac
+
+echo "Creating label: $label for address: $1"
+
+sudo netlabelctl unlbl del default address:$1
+sudo netlabelctl unlbl add default address:$1 label:$label

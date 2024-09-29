@@ -1,0 +1,191 @@
+/home/maintuser/2020SpringTeam32/cops_platform/container_runtime
+Clearing list of connections...
+                                 Waiting for flask to terminate.Sleeping for 3 seconds...
+CONNECTING...
+=============================================================================================
+Connecting as coordinator...
+Connecting as instructor...
+Connecting as student...
+=============================================================================================
+SETTING UP SYSTEM FOR TESTING (errors are okay here)
+=============================================================================================
+{"message": "Failed to add a new Student. A user with this username already exists in the system."}
+{"message": "Failed to add a new Student. A user with this username already exists in the system."}
+{"message": "Failed to add a new Student. A user with this username already exists in the system."}
+{"message": "Failed to add a new Student. A user with this username already exists in the system."}
+{"message": "Error with deleting user"}
+{"message": "Error with deleting user"}
+{"message": "Error with deleting user"}
+"Course successfully deleted!"
+"Course successfully deleted!"
+"Course successfully deleted!"
+{"message": "Error handling the deletion of this course"}
+"Course successfully added!"
+"Course successfully added!"
+"Course successfully added!"
+"Student successfully enrolled!"
+=============================================================================================
+RUNNING API REQUESTS AS COORDINATOR
+=============================================================================================
+Viewing account info
+{"id": 1, "username": "coordinator", "name": "Coordinator"}
+
+Viewing schedule
+[]
+
+Adding a student
+"User successfully added!"
+
+Adding an instructor
+"User successfully added!"
+
+Adding a coordinator
+"User successfully added!"
+
+Deleting student
+"User successfully deleted!"
+
+Deleting instructor
+"User successfully deleted!"
+
+Deleting coordinator
+"User successfully deleted!"
+
+Adding course
+"Course successfully added!"
+
+Enrolling student in course
+"Student successfully enrolled!"
+
+Setting student grade
+"Student's grade successfully modified!"
+
+Deleting course with no enrolled students
+"Course successfully deleted!"
+
+Deleting course with enrolled students
+"Course successfully deleted!"
+
+=============================================================================================
+SETTING UP SYSTEM FOR TESTING (errors are okay here)
+=============================================================================================
+{"message": "Failed to add a new Student. A user with this username already exists in the system."}
+"User successfully added!"
+"User successfully added!"
+"User successfully added!"
+"User successfully deleted!"
+"User successfully deleted!"
+"User successfully deleted!"
+{"message": "Error handling the deletion of this course"}
+{"message": "Error handling the deletion of this course"}
+"Course successfully deleted!"
+"Course successfully deleted!"
+"Course successfully added!"
+"Course successfully added!"
+"Course successfully added!"
+"Student successfully enrolled!"
+=============================================================================================
+RUNNING API REQUESTS AS INSTRUCTOR
+=============================================================================================
+Viewing account info
+{"id": 1, "username": "instructor", "name": "Instructor"}
+
+Viewing schedule
+[{"name": "CSC316", "days": "MW", "start_time": "12:30:00", "end_time": "02:15:00", "students": ["Student"]}, {"name": "testcourse0", "days": "MW", "start_time": "02:00:00", "end_time": "03:00:00", "students": ["Test User 0"]}, {"name": "testcourse1", "days": "TTh", "start_time": "03:00:00", "end_time": "04:00:00", "students": []}, {"name": "testcourse2", "days": "MWF", "start_time": "05:00:00", "end_time": "06:00:00", "students": []}]
+
+Adding a student
+{"message": "Access Denied."}
+
+Adding an instructor
+{"message": "Access Denied."}
+
+Adding a coordinator
+{"message": "Access Denied."}
+
+Deleting student
+{"message": "Access Denied."}
+
+Deleting instructor
+{"message": "Access Denied."}
+
+Deleting coordinator
+{"message": "Access Denied."}
+
+Adding course
+{"message": "Access Denied."}
+
+Enrolling student in course
+{"message": "Access Denied."}
+
+Setting student grade
+"Student's grade successfully modified!"
+
+Deleting course with no enrolled students
+{"message": "Access Denied."}
+
+Deleting course with enrolled students
+{"message": "Access Denied."}
+
+=============================================================================================
+SETTING UP SYSTEM FOR TESTING (errors are okay here)
+=============================================================================================
+{"message": "Failed to add a new Student. A user with this username already exists in the system."}
+{"message": "Failed to add a new Student. A user with this username already exists in the system."}
+{"message": "Failed to add a new Student. A user with this username already exists in the system."}
+{"message": "Failed to add a new Student. A user with this username already exists in the system."}
+{"message": "Error with deleting user"}
+{"message": "Error with deleting user"}
+{"message": "Error with deleting user"}
+"Course successfully deleted!"
+"Course successfully deleted!"
+"Course successfully deleted!"
+{"message": "Error handling the deletion of this course"}
+"Course successfully added!"
+"Course successfully added!"
+"Course successfully added!"
+"Student successfully enrolled!"
+=============================================================================================
+RUNNING API REQUESTS AS STUDENT
+=============================================================================================
+Viewing account info
+{"id": 1, "username": "student", "name": "Student", "gpa": 4.0}
+
+Viewing schedule
+[{"name": "CSC316", "days": "MW", "start_time": "12:30:00", "end_time": "02:15:00", "instruct_name": "Instructor", "grade": 4.0}]
+
+Adding a student
+{"message": "Access Denied."}
+
+Adding an instructor
+{"message": "Access Denied."}
+
+Adding a coordinator
+{"message": "Access Denied."}
+
+Deleting student
+{"message": "Access Denied."}
+
+Deleting instructor
+{"message": "Access Denied."}
+
+Deleting coordinator
+{"message": "Access Denied."}
+
+Adding course
+{"message": "Access Denied."}
+
+Enrolling student in course
+{"message": "Access Denied."}
+
+Setting student grade
+{"message": "Access Denied."}
+
+Deleting course with no enrolled students
+{"message": "Access Denied."}
+
+Deleting course with enrolled students
+{"message": "Access Denied."}
+
+=============================================================================================
+Clearing list of connections...
+Waiting for flask to terminate...

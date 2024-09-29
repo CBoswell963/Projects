@@ -1,0 +1,6 @@
+#! /usr/bin/sh
+# This script should be used by python to clear labels for container ips after they have been closed
+# Again, not very secure, still vulnerable to injection via passed-in parameters
+
+echo "Deleting label for address: $1"
+sudo netlabelctl unlbl del default address:$1
