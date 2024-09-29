@@ -1,0 +1,66 @@
+policy_module(coordinator, 1.0.0)
+
+########################################
+#
+# Declarations
+#
+
+type coordinator_t;
+type coordinator_exec_t;
+init_daemon_domain(coordinator_t, coordinator_exec_t)
+
+#permissive coordinator_t;
+
+########################################
+#
+# coordinator local policy
+#
+allow coordinator_t self:process { fork };
+allow coordinator_t self:fifo_file rw_fifo_file_perms;
+allow coordinator_t self:unix_stream_socket create_stream_socket_perms;
+
+domain_use_interactive_fds(coordinator_t)
+
+files_read_etc_files(coordinator_t)
+
+miscfiles_read_localization(coordinator_t)
+
+########################################
+#
+# Spencer changes
+#
+
+#These changes allow the terminal to execute the coordinator binary
+require {
+  type unconfined_t;
+  type user_devpts_t;
+  role unconfined_r;
+  role object_r;
+}
+
+role unconfined_r types coordinator_t;
+
+allow unconfined_t coordinator_t:process transition;
+allow unconfined_t coordinator_t:process2 nosuid_transition;
+
+type_transition unconfined_t coordinator_exec_t:process coordinator_t;
+
+#These changes allow us to restrict the files in the data directory
+#NOTE: a lot of these changes are just in this coordinator.te file since they only need to be applied once
+type grade_data_t;
+type user_data_t;
+#my_cat needs to be accessible to coordinators, instructors, and students
+type my_cat_exec_t;
+
+files_type(grade_data_t)
+files_type(user_data_t)
+files_type(my_cat_exec_t)
+
+allow coordinator_t my_cat_exec_t:file {read write execute open execute_no_trans};
+allow coordinator_t grade_data_t:file {read write open getattr};
+allow coordinator_t user_data_t:file {read write open getattr};
+
+#I don't know why I need the following change, the executable is getting denied access to this file though
+allow coordinator_t user_devpts_t:chr_file {read write open getattr};
+
+role object_r types {grade_data_t user_data_t my_cat_exec_t};

@@ -1,0 +1,59 @@
+policy_module(student, 1.0.0)
+
+########################################
+#
+# Declarations
+#
+
+type student_t;
+type student_exec_t;
+init_daemon_domain(student_t, student_exec_t)
+
+#permissive student_t;
+
+########################################
+#
+# student local policy
+#
+allow student_t self:process { fork };
+allow student_t self:fifo_file rw_fifo_file_perms;
+allow student_t self:unix_stream_socket create_stream_socket_perms;
+
+domain_use_interactive_fds(student_t)
+
+files_read_etc_files(student_t)
+
+miscfiles_read_localization(student_t)
+
+########################################
+#
+# Spencer changes
+#
+
+#These changes allow the terminal to execute the student binary
+require {
+  type unconfined_t;
+  type user_devpts_t;
+  type grade_data_t;
+  type user_data_t;
+  type my_cat_exec_t;
+  role unconfined_r;
+}
+
+role unconfined_r types student_t;
+
+allow unconfined_t student_t:process transition;
+allow unconfined_t student_t:process2 nosuid_transition;
+
+type_transition unconfined_t student_exec_t:process student_t;
+
+#These changes allow us to restrict the files in the data directory
+#NOTE: the coordinator.te file is different, it has some changes that only need to be applied once (like the declarations of grade_data_t and user_data_t)
+
+allow student_t my_cat_exec_t:file {read write execute open execute_no_trans};
+allow student_t grade_data_t:file {read write open getattr};
+#students cannot see user data
+
+#I don't know why I need the following change, the executable is getting denied access to this file though
+allow student_t user_devpts_t:chr_file {read write open getattr};
+
