@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>COPS Platform Single Sign-on</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/util.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-cookies.min.js"></script>
+</head>
+<body ng-app="app">
+    <script>
+        const SERVICE_REQUEST_URL = "http://0.0.0.0:5000";
+        var app = angular.module("app", ["ngCookies"]);
+        app.controller("ssoController", function($scope, $http, $cookies) {
+
+            $scope.connect = function(username) {
+                var service = "course_manager";
+
+                var api = "/service_request";
+                var data = {
+                    service: service,
+                    username: username
+                };
+                return post($http, api, data, $cookies);
+            }
+
+            $scope.login = function() {
+
+                $cookies.put("url", SERVICE_REQUEST_URL);
+
+                var username = $scope.username;
+                var password = $scope.password;
+
+                if (!username || !password) {
+                    alert("Must fill out all fields");
+                    return;
+                }
+
+                $scope.connect(username)
+                .then(function(response) {
+                    var url = response.data.url.replace("127.0.0.1", "0.0.0.0");
+                    $cookies.put("url", url);
+                    home();
+                })
+                .catch(handleRejection);
+            }
+        });
+    </script>
+    <div ng-controller="ssoController">
+        <h1>COPS Platform Single Sign-on</h1>
+        <fieldset>
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Username" id="username" ng-model="username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>
+                        <input autocomplete="off" type="password" placeholder="Password" id="password" ng-model="password">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button ng-click="login()">Login</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+</body>
+</html>

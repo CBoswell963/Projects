@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Manager - Enroll Student</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/util.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-cookies.min.js"></script>
+</head>
+<body ng-app="app">
+    <script>
+        var app = angular.module("app", ["ngCookies"]);
+        app.controller("enrollStudentController", function($scope, $http, $cookies) {
+
+            $scope.logout = function() {
+                logout($http, $cookies);
+            }
+
+            $scope.enrollStudent = function() {
+
+                var username = $scope.username;
+                var course_name = $scope.course_name;
+
+                if (!username || !course_name) {
+                    alert("Must fill out all fields");
+                    return;
+                }
+
+                var api = "/api/mapping";
+                var data = {
+                    username: username,
+                    course_name: course_name
+                };
+                post($http, api, data, $cookies)
+                .then(function(response) {
+                    console.log(response.data);
+                })
+                .catch(handleRejection)
+                .finally(home);
+            }
+        });
+    </script>
+    <div ng-controller="enrollStudentController">
+        <h1 onclick="home()">Course Manager - Enroll Student</h1>
+        <button ng-click="logout()">Logout</button>
+        <fieldset>
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Username" id="username" ng-model="username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Course Name</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Course Name" id="course_name" ng-model="course_name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button ng-click="enrollStudent()">Enroll</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+</body>
+</html>

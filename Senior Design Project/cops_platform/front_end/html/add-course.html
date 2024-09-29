@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Manager - Add Course</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/util.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-cookies.min.js"></script>
+</head>
+<body ng-app="app">
+    <script>
+        var app = angular.module("app", ["ngCookies"]);
+        app.controller("addCourseController", function($scope, $http, $cookies) {
+
+            $scope.logout = function() {
+                logout($http, $cookies);
+            }
+
+            $scope.addCourse = function() {
+
+                var name = $scope.name;
+                var days = $scope.days;
+                var start_time = $scope.start_time;
+                var end_time = $scope.end_time;
+                var instructor_username = $scope.instructor_username;
+
+                if (!name || !days || !start_time || !end_time || !instructor_username) {
+                    alert("Must fill out all fields");
+                    return;
+                }
+
+                var api = "/api/course";
+                var data = {
+                    name: name,
+                    days: days,
+                    start_time: start_time,
+                    end_time: end_time,
+                    instructor_username: instructor_username
+                };
+                post($http, api, data, $cookies)
+                .then(function(response) {
+                    console.log(response.data);
+                })
+                .catch(handleRejection)
+                .finally(home);
+            }
+        });
+    </script>
+    <div ng-controller="addCourseController">
+        <h1 onclick="home()">Course Manager - Add Course</h1>
+        <button ng-click="logout()">Logout</button>
+        <fieldset>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Name" id="name" ng-model="name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Weekday</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Weekday" id="days" ng-model="days">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Start time</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Start time" id="start_time" ng-model="start_time">
+                    </td>
+                </tr>
+                <tr>
+                    <td>End time</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="End time" id="end_time" ng-model="end_time">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Instructor Username</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Instructor Username" id="instructor_username" ng-model="instructor_username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button ng-click="addCourse()">Add</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+</body>
+</html>

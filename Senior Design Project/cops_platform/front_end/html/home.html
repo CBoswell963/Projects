@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Manager - Home</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/util.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-cookies.min.js"></script>
+</head>
+<body ng-app="app">
+    <script>
+        var app = angular.module("app", ["ngCookies"]);
+        app.controller("homeController", function($scope, $http, $cookies) {
+            $scope.logout = function() {
+                logout($http, $cookies);
+            }
+        });
+    </script>
+    <div ng-controller="homeController">
+        <h1>Course Manager - Home</h1>
+        <button ng-click="logout()">Logout</button>
+        <fieldset>
+            <div>
+                <a href="account-details.html">Account Details</a>
+            </div>
+            <div>
+                <a href="add-user.html">Add User</a>
+            </div>
+            <div>
+                <a href="delete-user.html">Delete User</a>
+            </div>
+            <div>
+                <a href="add-course.html">Add Course</a>
+            </div>
+            <div>
+                <a href="delete-course.html">Delete Course</a>
+            </div>
+            <div>
+                <a href="enroll-student.html">Enroll Student</a>
+            </div>
+            <div>
+                <a href="modify-grade.html">Modify Grade</a>
+            </div>
+            <div>
+                <a href="student-schedule.html">Student Schedule</a>
+            </div>
+            <div>
+                <a href="instructor-schedule.html">Instructor Schedule</a>
+            </div>
+        </fieldset>
+    </div>
+</body>
+</html>

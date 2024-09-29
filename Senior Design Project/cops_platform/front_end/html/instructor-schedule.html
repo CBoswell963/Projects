@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Manager - Instructor Schedule</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/util.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-cookies.min.js"></script>
+</head>
+<body ng-app="app">
+    <script>
+        var app = angular.module("app", ["ngCookies"]);
+        app.controller("instructorScheduleController", function($scope, $http, $cookies) {
+
+            $scope.logout = function() {
+                logout($http, $cookies);
+            }
+
+            $scope.loadData = function(data) {
+                $scope.courses = data;
+            }
+
+            $scope.showStudents = function(course) {
+                $scope.course = course;
+            }
+
+            $scope.getInstructorSchedule = function() {
+                var api = "/api/schedule";
+                get($http, api, $cookies)
+                .then(function(response) {
+                    $scope.loadData(response.data);
+                })
+                .catch(handleRejection);
+            }
+            $scope.getInstructorSchedule();
+        });
+    </script>
+    <div ng-controller="instructorScheduleController">
+        <h1 onclick="home()">Course Manager - Instructor Schedule</h1>
+        <button ng-click="logout()">Logout</button>
+        <table class="data-table" id="instructor_schedule">
+            <tr>
+                <th>Course Name</th>
+                <th>Weekday</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Students</th>
+            </tr>
+            <tr ng-repeat="course in courses">
+                <td>{{course.name}}</td>
+                <td>{{course.days}}</td>
+                <td>{{course.start_time}}</td>
+                <td>{{course.end_time}}</td>
+                <td>
+                    <button ng-click="showStudents(course)">Show Students</button>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table class="data-table" id="student_list" ng-show="course">
+            <tr>
+                <th>Students - {{course.name}}</th>
+            </tr>
+            <tr ng-repeat="student in course.students">
+                <td>{{student}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

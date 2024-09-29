@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Manager - Modify Grade</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/util.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-cookies.min.js"></script>
+</head>
+<body ng-app="app">
+    <script>
+        var app = angular.module("app", ["ngCookies"]);
+        app.controller("modifyGradeController", function($scope, $http, $cookies) {
+
+            $scope.logout = function() {
+                logout($http, $cookies);
+            }
+
+            $scope.modifyGrade = function() {
+
+                var username = $scope.username;
+                var course_name = $scope.course_name;
+                var grade = $scope.grade;
+
+                if (!username || !course_name || !grade) {
+                    alert("Must fill out all fields");
+                    return;
+                }
+
+                var api = "/api/mapping/grade";
+                var data = {
+                    username: username,
+                    course_name: course_name,
+                    grade: grade
+                };
+                put($http, api, data, $cookies)
+                .then(function(response) {
+                    console.log(response.data);
+                })
+                .catch(handleRejection)
+                .finally(home);
+            }
+        });
+    </script>
+    <div ng-controller="modifyGradeController">
+        <h1 onclick="home()">Course Manager - Modify Grade</h1>
+        <button ng-click="logout()">Logout</button>
+        <fieldset>
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Username" id="username" ng-model="username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Course Name</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Course Name" id="course_name" ng-model="course_name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Grade</td>
+                    <td>
+                        <input autocomplete="off" type="number" placeholder="Grade" id="grade" ng-model="grade">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button ng-click="modifyGrade()">Submit</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+</body>
+</html>

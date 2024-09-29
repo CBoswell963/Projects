@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Manager - Delete User</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/util.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-cookies.min.js"></script>
+</head>
+<body ng-app="app">
+    <script>
+        var app = angular.module("app", ["ngCookies"]);
+        app.controller("deleteUserController", function($scope, $http, $cookies) {
+
+            $scope.logout = function() {
+                logout($http, $cookies);
+            }
+
+            $scope.deleteUser = function() {
+
+                var username = $scope.username;
+                var role = $scope.role;
+
+                if (!username || !role) {
+                    alert("Must fill out all fields");
+                    return;
+                }
+
+                var api = "/api/user";
+                var data = {
+                    username: username,
+                    role: role
+                };
+                del($http, api, data, $cookies)
+                .then(function(response) {
+                    console.log(response.data);
+                })
+                .catch(handleRejection)
+                .finally(home);
+            }
+        });
+    </script>
+    <div ng-controller="deleteUserController">
+        <h1 onclick="home()">Course Manager - Delete User</h1>
+        <button ng-click="logout()">Logout</button>
+        <fieldset>
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td>
+                        <input autocomplete="off" type="text" placeholder="Username" id="username" ng-model="username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Role</td>
+                    <td>
+                        <input autocomplete="off" type="radio" id="student" name="role" value="student" ng-model="role">
+                        <label for="student">Student</label>
+                        <br />
+                        <input autocomplete="off" type="radio" id="instructor" name="role" value="instructor" ng-model="role">
+                        <label for="instructor">Instructor</label>
+                        <br />
+                        <input autocomplete="off" type="radio" id="coordinator" name="role" value="coordinator" ng-model="role">
+                        <label for="coordinator">Coordinator</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button ng-click="deleteUser()">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+</body>
+</html>
