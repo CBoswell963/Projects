@@ -1,0 +1,203 @@
+-- Logs begin at Wed 2019-09-11 15:22:28 UTC, end at Sat 2020-04-04 00:21:18 UTC. --
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-3]         CREATE TABLE student (
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-4]                 id SERIAL NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-5]                 username VARCHAR(60) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-6]                 name VARCHAR(120) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-7]                 gpa FLOAT,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-8]                 PRIMARY KEY (id),
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-9]                 UNIQUE (username)
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-10]         )
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-11]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [14-12]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-1] 2020-04-04 00:12:18.909 UTC [3889] LOG:  SELinux: denied { create } scontext=course_manager_u:course_manager_r:coordinator_t:s0 tcontext=course_manager_u:object_r:unlabeled_t:s0 tclass=db_sequence name="public.student_id_seq"
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-2] 2020-04-04 00:12:18.909 UTC [3889] STATEMENT:
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-3]         CREATE TABLE student (
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-4]                 id SERIAL NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-5]                 username VARCHAR(60) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-6]                 name VARCHAR(120) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-7]                 gpa FLOAT,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-8]                 PRIMARY KEY (id),
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-9]                 UNIQUE (username)
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-10]         )
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-11]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [15-12]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-1] 2020-04-04 00:12:18.910 UTC [3889] LOG:  SELinux: denied { create } scontext=course_manager_u:course_manager_r:coordinator_t:s0 tcontext=course_manager_u:object_r:unlabeled_t:s0 tclass=db_table name="public.student"
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-2] 2020-04-04 00:12:18.910 UTC [3889] STATEMENT:
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-3]         CREATE TABLE student (
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-4]                 id SERIAL NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-5]                 username VARCHAR(60) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-6]                 name VARCHAR(120) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-7]                 gpa FLOAT,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-8]                 PRIMARY KEY (id),
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-9]                 UNIQUE (username)
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-10]         )
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-11]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [16-12]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-1] 2020-04-04 00:12:18.910 UTC [3889] LOG:  SELinux: denied { create } scontext=course_manager_u:course_manager_r:coordinator_t:s0 tcontext=course_manager_u:object_r:unlabeled_t:s0 tclass=db_column name="public.student.tableoid"
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-2] 2020-04-04 00:12:18.910 UTC [3889] STATEMENT:
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-3]         CREATE TABLE student (
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-4]                 id SERIAL NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-5]                 username VARCHAR(60) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-6]                 name VARCHAR(120) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-7]                 gpa FLOAT,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-8]                 PRIMARY KEY (id),
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-9]                 UNIQUE (username)
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-10]         )
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-11]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [17-12]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-1] 2020-04-04 00:12:18.919 UTC [3889] LOG:  SELinux: denied { setattr } scontext=course_manager_u:course_manager_r:coordinator_t:s0 tcontext=course_manager_u:object_r:unlabeled_t:s0 tclass=db_sequence name="public.student_id_seq"
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-2] 2020-04-04 00:12:18.919 UTC [3889] STATEMENT:
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-3]         CREATE TABLE student (
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-4]                 id SERIAL NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-5]                 username VARCHAR(60) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-6]                 name VARCHAR(120) NOT NULL,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-7]                 gpa FLOAT,
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-8]                 PRIMARY KEY (id),
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-9]                 UNIQUE (username)
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-10]         )
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-11]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [18-12]
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [19-1] 2020-04-04 00:12:18.961 UTC [3889] LOG:  SELinux: denied { select insert } scontext=course_manager_u:course_manager_r:coordinator_t:s0 tcontext=course_manager_u:object_r:unlabeled_t:s0 tclass=db_table name="public.student"
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [19-2] 2020-04-04 00:12:18.961 UTC [3889] STATEMENT:  INSERT INTO student (username, name, gpa) VALUES ('student', 'Student', NULL) RETURNING student.id
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [20-1] 2020-04-04 00:12:18.961 UTC [3889] LOG:  SELinux: denied { select } scontext=course_manager_u:course_manager_r:coordinator_t:s0 tcontext=course_manager_u:object_r:unlabeled_t:s0 tclass=db_column name="column id of table student"
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [20-2] 2020-04-04 00:12:18.961 UTC [3889] STATEMENT:  INSERT INTO student (username, name, gpa) VALUES ('student', 'Student', NULL) RETURNING student.id
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [21-1] 2020-04-04 00:12:18.961 UTC [3889] LOG:  SELinux: denied { insert } scontext=course_manager_u:course_manager_r:coordinator_t:s0 tcontext=course_manager_u:object_r:unlabeled_t:s0 tclass=db_column name="column username of table student"
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [21-2] 2020-04-04 00:12:18.961 UTC [3889] STATEMENT:  INSERT INTO student (username, name, gpa) VALUES ('student', 'Student', NULL) RETURNING student.id
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [22-1] 2020-04-04 00:12:18.973 UTC [3889] LOG:  SELinux: denied { lock } scontext=course_manager_u:course_manager_r:coordinator_t:s0 tcontext=course_manager_u:object_r:unlabeled_t:s0 tclass=db_table name="public.instructor"
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [22-2] 2020-04-04 00:12:18.973 UTC [3889] CONTEXT:  SQL statement "SELECT 1 FROM ONLY "public"."instructor" x WHERE "id" OPERATOR(pg_catalog.=) $1 FOR KEY SHARE OF x"
+
+Apr 04 00:12:18 ip-10-0-3-74.ec2.internal postgres[3889]: [22-3] 2020-04-04 00:12:18.973 UTC [3889] STATEMENT:  INSERT INTO course (name, days, start_time, end_time, instructor_id) VALUES ('CSC316', 'MW', '12:30:00'::time, '02:15:00'::time, 1) RETURNING course.id
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal sshd[3919]: rexec line 153: Deprecated option RhostsRSAAuthentication
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal sshd[3919]: error: Could not load host key: /etc/ssh/ssh_host_ed25519_key
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal sshd[3919]: FIPS mode initialized
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal sshd[3919]: reprocess config line 153: Deprecated option RhostsRSAAuthentication
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal sshd[3919]: Accepted publickey for maintuser from 10.0.1.80 port 42392 ssh2: RSA SHA256:PDgEciOIe/e1IPN/tUQPKBGwgdxWsi/W0Z0SJwm1Zqk
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal systemd[1]: Started Session 4 of user maintuser.
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal systemd-logind[1513]: New session 4 of user maintuser.
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal sshd[3919]: pam_unix(sshd:session): session opened for user maintuser by (uid=0)
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal sshd[3919]: pam_unix(sshd:session): session closed for user maintuser
+
+Apr 04 00:12:52 ip-10-0-3-74.ec2.internal systemd-logind[1513]: Removed session 4.
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: 2020-04-04 00:19:46 INFO Backing off health check to every 1200 seconds for 3600 seconds.
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: 2020-04-04 00:19:46 ERROR Health ping failed with error - EC2RoleRequestError: no EC2 instance role found
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: caused by: EC2MetadataError: failed to make EC2Metadata request
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: caused by: <?xml version="1.0" encoding="iso-8859-1"?>
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: <head>
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: <title>404 - Not Found</title>
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: </head>
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: <body>
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: <h1>404 - Not Found</h1>
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: </body>
+
+Apr 04 00:19:46 ip-10-0-3-74.ec2.internal amazon-ssm-agent[2263]: </html>
+
+Apr 04 00:21:09 ip-10-0-3-74.ec2.internal sudo[4381]: maintuser : TTY=pts/0 ; PWD=/home/maintuser/2020SpringTeam32/cops_platform/policies/course_manager ; USER=root ; COMMAND=/sbin/semodule -i course_manager.pp
+
+Apr 04 00:21:09 ip-10-0-3-74.ec2.internal sudo[4381]: pam_unix(sudo:session): session opened for user root by maintuser(uid=0)
+
+Apr 04 00:21:16 ip-10-0-3-74.ec2.internal kernel: SELinux: 2048 avtab hash slots, 112376 rules.
+
+Apr 04 00:21:16 ip-10-0-3-74.ec2.internal kernel: SELinux: 2048 avtab hash slots, 112376 rules.
+
+Apr 04 00:21:16 ip-10-0-3-74.ec2.internal kernel: SELinux:  9 users, 15 roles, 5056 types, 316 bools, 1 sens, 1024 cats
+
+Apr 04 00:21:16 ip-10-0-3-74.ec2.internal kernel: SELinux:  130 classes, 112376 rules
+
+Apr 04 00:21:16 ip-10-0-3-74.ec2.internal kernel: SELinux:  Converting 2325 SID table entries...
+
+Apr 04 00:21:18 ip-10-0-3-74.ec2.internal dbus[1514]: [system] Reloaded configuration
+
+Apr 04 00:21:18 ip-10-0-3-74.ec2.internal sudo[4381]: pam_unix(sudo:session): session closed for user root
+
+

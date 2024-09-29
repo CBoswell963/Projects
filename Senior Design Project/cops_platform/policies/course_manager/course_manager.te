@@ -1,0 +1,146 @@
+# The following is the source code for a policy module for CourseManager
+# Author: Spencer Yoder
+# Compile by running 'source compile.sh' and then running 'secompile'
+# Build by running sudo semodule -i course_manager.pp
+
+# This is a policy module
+policy_module(course_manager,1.0.0)
+
+# These will be the types for our users:
+type coordinator_t;
+type instructor_t;
+type student_t;
+
+# These will be the types for our data in the database
+type course_data_t;
+type grade_data_t;
+type coordinator_data_t;
+type instructor_data_t;
+type student_data_t;
+
+# An SELinux role for CourseManager users
+# We don't want preexisting roles to be able to adopt these types so that this new policy can be as insular as possible
+role course_manager_r;
+role course_manager_r types {coordinator_t instructor_t student_t};
+
+# Even though a new user and role are being created for connecting CourseManager users data types should be assigned to
+# system_u:object_r
+# Because these is the user and role for other database objects. No need to go against convention
+
+# system_u is already allowed to connect to object_r
+# Tell our policy about object_r so we can allow it to adopt our new types
+require {
+  role object_r;
+}
+
+role object_r types {course_data_t grade_data_t coordinator_data_t instructor_data_t student_data_t};
+
+########################################ACCESS VECTOR RULES########################################
+require {
+  type netif_t;
+  type unconfined_t;
+  type unconfined_service_t;
+  type node_t;
+  type unlabeled_t;
+  type container_t;
+  type container_runtime_t;
+  type firewalld_t;
+  type iptables_t;
+    
+  # SEPostgres classes
+  class db_table {search select drop create insert lock delete update};
+  class db_column {select drop create insert delete update};
+  class db_schema {search};
+  class db_procedure {execute};
+}
+
+# Allow docker to communicate with postgres
+allow container_t netif_t:netif {egress};
+allow container_t node_t:node {sendto};
+allow unlabeled_t netif_t:netif {egress};
+allow unlabeled_t node_t:node {sendto};
+
+# Allow iptable connections through the firewall (I think)
+#allow firewalld_t iptables_t:process {noatsecure siginh rlimitinh};
+
+# Allow container runtime to search the database to validate users
+allow unconfined_t unlabeled_t:db_schema {search};
+allow unconfined_t unlabeled_t:db_table {select};
+allow unconfined_t unlabeled_t:db_column {select};
+allow unconfined_t unlabeled_t:db_procedure {execute};
+allow unconfined_t student_data_t:db_table {select};
+allow unconfined_t instructor_data_t:db_table {select};
+allow unconfined_t coordinator_data_t:db_table {select};
+allow unconfined_t course_data_t:db_column {select};
+allow unconfined_t instructor_data_t:db_column {select};
+allow unconfined_t coordinator_data_t:db_column {select};
+
+# Allow coordinator to connect to the database and login
+allow coordinator_t netif_t:netif {ingress};
+allow coordinator_t node_t:node {recvfrom};
+allow container_runtime_t coordinator_t:peer {recv};
+allow unconfined_service_t coordinator_t:peer {recv};
+allow coordinator_t unlabeled_t:db_schema {search};
+allow coordinator_t unlabeled_t:db_table {select};
+allow coordinator_t unlabeled_t:db_column  {select};
+allow coordinator_t unlabeled_t:db_procedure {execute};
+allow coordinator_t coordinator_data_t:db_table {select};
+allow coordinator_t coordinator_data_t:db_column {select};
+allow coordinator_t course_data_t:db_column {select};
+
+# Allow instructor to connect to the database and login
+allow instructor_t netif_t:netif {ingress};
+allow instructor_t node_t:node {recvfrom};
+allow container_runtime_t instructor_t:peer {recv};
+allow unconfined_service_t instructor_t:peer {recv};
+allow instructor_t unlabeled_t:db_schema {search};
+allow instructor_t unlabeled_t:db_table {select};
+allow instructor_t unlabeled_t:db_column  {select};
+allow instructor_t unlabeled_t:db_procedure {execute};
+allow instructor_t instructor_data_t:db_table {select};
+allow instructor_t instructor_data_t:db_column {select};
+allow instructor_t course_data_t:db_column {select};
+
+# Allow student to connect to the database and login
+allow student_t netif_t:netif {ingress};
+allow student_t node_t:node {recvfrom};
+allow container_runtime_t student_t:peer {recv};
+allow unconfined_service_t student_t:peer {recv};
+allow student_t unlabeled_t:db_schema {search};
+allow student_t unlabeled_t:db_table {select};
+allow student_t unlabeled_t:db_column  {select};
+allow student_t unlabeled_t:db_procedure {execute};
+allow student_t student_data_t:db_table {select};
+allow student_t student_data_t:db_column {select};
+allow student_t course_data_t:db_column {select};
+
+# Allow coordinator to view, add, and remove objects from the database
+allow coordinator_t coordinator_data_t:db_table {insert lock delete};
+allow coordinator_t coordinator_data_t:db_column {insert delete};
+allow coordinator_t instructor_data_t:db_table {select insert lock delete};
+allow coordinator_t instructor_data_t:db_column {select insert delete};
+allow coordinator_t student_data_t:db_table {select insert lock delete};
+allow coordinator_t student_data_t:db_column {select insert delete};
+allow coordinator_t course_data_t:db_table {select insert lock delete update};
+allow coordinator_t course_data_t:db_column {insert delete update};
+allow coordinator_t grade_data_t:db_column {select insert delete update};
+allow coordinator_t unlabeled_t:db_column {insert};
+
+#Allow instructor_t to modify student grades and see their schedule
+allow instructor_t student_data_t:db_table {select};
+allow instructor_t course_data_t:db_table {select update};
+allow instructor_t grade_data_t:db_column {select update};
+
+#Allow student_t to see their grades and schedules
+allow student_t course_data_t:db_table {select};
+allow student_t grade_data_t:db_column {select};
+allow student_t instructor_data_t:db_table {select};
+
+#This allows us to connect to the database as a student, to check that there are no permissions we can't confirm with API calls
+allow unconfined_t student_t:peer {recv};
+###################################################################################################
+
+
+# An SELinux user for the course_manager_r role
+# For some unknown reason, it's necessary to specify users at the end of the file.
+user course_manager_u roles course_manager_r level s0 range s0;
